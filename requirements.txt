@@ -1,2 +1,4 @@
 flask==3.0.3
 openai==1.23.2
+tiktoken==0.6.0
+pillow==10.3.0
