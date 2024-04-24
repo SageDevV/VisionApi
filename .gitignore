@@ -1,0 +1,32 @@
+# Ignorar a pasta .vscode
+.vscode/
+
+# Ignorar a pasta venv
+venv/
+
+# Ignorar arquivos de configuração do Flask
+*.cfg
+
+# Ignorar arquivos de bytecode Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar arquivos de ambiente Python
+*.env/
+*.github/
+*.venv/
+*__pycache__/
+
+# Ignorar arquivos de log
+*.log
+
+# Ignorar arquivos de banco de dados SQLite
+*.sqlite
+
+# Ignorar arquivos de distribuição Python
+dist/
+build/
+*.egg-info/
+*.egg
