@@ -30,21 +30,23 @@ def selecionar_imagem_associada(caminho_imagem):
         with open(caminho_imagem, "r", encoding="utf-8") as arquivo:
             dados = arquivo.read()
             return dados
-    except IOError as e:
-        print(f"Erro no carregamento de arquivo: {e}")
+    except IOError:
+        return None
 
 def obter_descricao_json(caminho_produto_descricao_json):
     try:
         with open(caminho_produto_descricao_json, 'r') as f:
             produto_descricao_json = json.load(f)
             return produto_descricao_json
-    except IOError as e:
-        print(f"Erro no carregamento de arquivo: {e}")
+    except IOError:
+        return None
 
 def ler_descricao_json(caminho_descricao_json):
-    with open(caminho_descricao_json, 'r') as arquivo:
-        dados = json.load(arquivo)
-    return dados
+    try:
+        with open(caminho_descricao_json, 'r') as arquivo:
+            return json.load(arquivo)
+    except IOError:
+        return None
 
 def obter_imagem(caminho_imagem):
     try:
@@ -53,5 +55,5 @@ def obter_imagem(caminho_imagem):
         imagem.save(buffered, format=imagem.format)
         img_str = base64.b64encode(buffered.getvalue()).decode()
         return img_str
-    except IOError as e:
-        print(f"Erro no carregamento de imagem: {e}")
+    except IOError:
+        return None

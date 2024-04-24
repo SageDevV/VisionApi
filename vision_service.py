@@ -1,4 +1,5 @@
 import os
+from flask import jsonify
 from openai import OpenAI
 
 cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -9,6 +10,7 @@ def analisar_imagem(imagem_base64, prompt = None):
         # Assuma o perfil de transcritor de imagens da loja Havan e analise a imagem abaixo.
 
         # Ao analisar a imagem você deve somente informar qual categoria que a imagem pertence, independente se a imagem é de um produto ou não, ela deve ser classificada nas categorias abaixo.
+        # Se não for possível identificar o Tipo produto, informe "Tipo produto: não identificado".
         # Não use acentos."
         # palavras devem ser minúsculas.
 
@@ -43,5 +45,5 @@ def analisar_imagem(imagem_base64, prompt = None):
             max_tokens=300,
             )
         return resposta.choices[0].message.content
-    except Exception as e:
-        return str(f"Houve um erro na requisição {e}.")
+    except Exception:
+        return None
