@@ -116,16 +116,6 @@ def vision_interface():
                 'data': None,
                 'error': "e necessario informar a imagem."
             })
-        
-        encode = tiktoken.encoding_for_model("gpt-4-vision-preview")
-        total_tokens = len(encode.encode(imagem_base64))
-
-        if(total_tokens > 10000):
-            return jsonify({
-                'classificacao': None,
-                'data': None,
-                'error': f"O numero maximo de tokens suportado e de 10000, numero de tokens informado: {total_tokens}."
-            })
     
         return vision_service(imagem_base64, prompt)
     except Exception as e:

@@ -42,7 +42,6 @@ def analisar_imagem(imagem_base64, prompt = None):
                 ],
                 }
             ],
-            max_tokens=300,
             )
         return resposta.choices[0].message.content
     except Exception:
