@@ -11,9 +11,9 @@ def vision_service(imagem_base64, prompt = None):
 
     if(descricao_imagem is None):
         return jsonify({
-            'classificação': None,
+            'classificacao': None,
             'data': None,
-            'error': "Não foi possível analisar a imagem." 
+            'error': "Nao foi possivel analisar a imagem." 
         })
     
     produto_tipo = obter_produto_tipo(descricao_imagem)
@@ -22,27 +22,27 @@ def vision_service(imagem_base64, prompt = None):
 
     if(produto_tipo is None or produto_design is None or produto_cor is None):
         return jsonify({
-            'classificação': descricao_imagem,
+            'classificacao': descricao_imagem,
             'data': None,
-            'error': f"Não foi possível classificar o produto: tipo: {produto_tipo}, formato: {produto_design}, cor: {produto_cor}."
+            'error': f"Nao foi possivel classificar o produto: tipo: {produto_tipo}, formato: {produto_design}, cor: {produto_cor}."
         })
 
     caminho_descricao_diretorio = obter_caminho_produto_descricao_diretorio(produto_tipo, produto_design, produto_cor)
 
     if(caminho_descricao_diretorio is None):
         return jsonify({
-            'classificação': descricao_imagem,
+            'classificacao': descricao_imagem,
             'data': None,
-            'error': "Não foi possível encontrar o diretório de descrição do produto."
+            'error': "Nao foi possivel encontrar o diretorio de descricao do produto."
         })
 
     descricoes_json_lista = obter_produtos_descricoes(caminho_descricao_diretorio)
 
     if(descricoes_json_lista is None):
         return jsonify({
-            'classificação': descricao_imagem,
+            'classificacao': descricao_imagem,
             'data': None,
-            'error': f"Não há descrições de produtos associados a classificação: tipo: {produto_tipo}, formato: {produto_design}, cor: {produto_cor}."
+            'error': f"Nao ha descricoes de produtos associados a classificacao: tipo: {produto_tipo}, formato: {produto_design}, cor: {produto_cor}."
         })
 
     produto_descricao_composicao_json_lista = []
@@ -52,9 +52,9 @@ def vision_service(imagem_base64, prompt = None):
 
         if(produto_descricao_composicao_json is None):
             return jsonify({
-                'classificação': descricao_imagem,
+                'classificacao': descricao_imagem,
                 'data': None,
-                'error': "Não foi possível carregar a descrição do produto."
+                'error': "Nao foi possivel carregar a descricao do produto."
             })
            
         produto_descricao_composicao_json_lista.append(produto_descricao_composicao_json)
@@ -63,18 +63,18 @@ def vision_service(imagem_base64, prompt = None):
 
     if(caminho_imagem_diretorio is None):
         return jsonify({
-            'classificação': descricao_imagem,
+            'classificacao': descricao_imagem,
             'data': None,
-            'error': "Não foi possível encontrar o diretório de imagem do produto."
+            'error': "Nao foi possivel encontrar o diretorio de imagem do produto."
         })
 
     produtos_imagens_lista = obter_produtos_imagens(caminho_imagem_diretorio)
 
     if(produtos_imagens_lista is None):
         return jsonify({
-            'classificação': descricao_imagem,
+            'classificacao': descricao_imagem,
             'data': None,
-            'error': f"Não há imagens de produtos associadas a classificação: tipo: {produto_tipo}, formato: {produto_design}, cor: {produto_cor}."
+            'error': f"Nao ha imagens de produtos associadas a classificacao: tipo: {produto_tipo}, formato: {produto_design}, cor: {produto_cor}."
         })
 
     produto_imagem_composicao_lista = []
@@ -84,15 +84,15 @@ def vision_service(imagem_base64, prompt = None):
 
         if(produto_imagem_composicao is None):
             return jsonify({
-                'classificação': descricao_imagem,
+                'classificacao': descricao_imagem,
                 'data': None,
-                'error': "Não foi possível carregar a imagem do produto."
+                'error': "Nao foi possivel carregar a imagem do produto."
             })
 
         produto_imagem_composicao_lista.append(produto_imagem_composicao)
 
     return jsonify({
-        'classificação': descricao_imagem,
+        'classificacao': descricao_imagem,
         'data': {
             'descricoes': produto_descricao_composicao_json_lista,
             'imagens': produto_imagem_composicao_lista
@@ -112,9 +112,9 @@ def vision_interface():
 
         if(imagem_base64 is None):
             return jsonify({
-                'classificação': None,
+                'classificacao': None,
                 'data': None,
-                'error': "é necessário informar a imagem."
+                'error': "e necessario informar a imagem."
             })
         
         encode = tiktoken.encoding_for_model("gpt-4-vision-preview")
@@ -122,17 +122,17 @@ def vision_interface():
 
         if(total_tokens > 10000):
             return jsonify({
-                'classificação': None,
+                'classificacao': None,
                 'data': None,
-                'error': f"O numero máximo de tokens suportado é de 10000, numero de tokens informado: {total_tokens}."
+                'error': f"O numero maximo de tokens suportado e de 10000, numero de tokens informado: {total_tokens}."
             })
     
         return vision_service(imagem_base64, prompt)
     except Exception as e:
         return jsonify({
-            'classificação': None,
+            'classificacao': None,
             'data': None,
-            'error': f"Houve um erro na requisição {e}."
+            'error': f"Houve um erro na requisicao {e}."
         })
 
 app.run(host="0.0.0.0", port=80)
