@@ -17,7 +17,7 @@ def analisar_imagem(imagem_base64, prompt = None):
         # Categorias: 
         # - Tipo produto = fritadeira, liquidificador.
         # - Design = quadrangular, cilindrico, triangular, retangular, circular, oval, hexagonal, octogonal
-        # - Cor = vermelho, azul, verde, amarelo, branco, preto, cinza, marrom, rosa, roxo, laranja, bege
+        # - Cor = vermelho, azul, verde, amarelo, branco, preto, cinza, marrom, rosa, roxo, laranja, bege, prata
 
         # Formato de saída:
         # Categorias: 1 - Tipo produto: fritadeira, 2 - Design: quadrangular, 3 - Cor: vermelho
