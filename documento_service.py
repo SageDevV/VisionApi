@@ -1,7 +1,7 @@
 import os
 
 tipos_produto = ['fritadeira', 'liquidificador']
-tipos_cor = ['vermelho', 'azul', 'verde', 'amarelo', 'branco', 'preto', 'cinza', 'marrom', 'rosa', 'roxo', 'laranja', 'bege']
+tipos_cor = ['vermelho', 'azul', 'verde', 'amarelo', 'branco', 'preto', 'cinza', 'marrom', 'rosa', 'roxo', 'laranja', 'bege', 'prata']
 tipos_design = ['quadrangular', 'cilindrico', 'triangular', 'retangular', 'circular', 'oval', 'hexagonal', 'octogonal']
 
 def obter_caminho_produto_descricao_diretorio(produto_tipo, produto_design, produto_cor):
